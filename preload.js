@@ -2,14 +2,15 @@
  * @Author: bonza bonzaphp@gmail.com
  * @Date: 2023-06-06 15:09:48
  * @LastEditors: bonza bonzaphp@gmail.com
- * @LastEditTime: 2023-06-07 10:49:36
+ * @LastEditTime: 2023-06-07 13:30:29
  * @FilePath: \utools\preload.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const { clipboard } = require('electron');
+// const { clipboard } = require('electron');
+// const clipboardy = require('clipboardy');
 
 // 获取当前插件的根目录
 const pluginDir = path.join(__dirname, '..');
@@ -22,25 +23,23 @@ window.exports = {
         mode: "none",
         args: {
             enter: (action) => {
-				if (utools.isWindows()) {
-					// action = { code, type, payload }
-					// utools.copyText(action.payload)
-					const filePath = "c:/Users/Administrator/.ssh/id_rsa.pub"
-					fs.readFile(filePath, 'utf-8', (err, data) => {
-						if (err) {
+				// Windows系统
+				const homedir = os.homedir();
+				// 公钥文件路径
+				const publicKeyPath = path.join(homedir, '.ssh', 'id_rsa.pub');
+				// 读取公钥文件内容
+				fs.readFile(publicKeyPath, 'utf-8', (err, data) => {
+					if (err) {
 						console.error(err);
 						return;
-						}
-						clipboard.writeText(data);
-						// utools.showNotification('文件内容已复制到剪切板');
-					});
-					// utools.copyText("ni zhe ge stupid")
-					// utools.copyFile('/c/Users/Administrator/.ssh/id_rsa.pub')
-					utools.outPlugin()
-					utools.hideMainWindow()
-					utools.showNotification('已复制')
-				}
-				utools.showNotification('插件不支持的系统')
+					}
+					// 复制文件内容到剪切板
+					// clipboard.writeText(data);
+					utools.copyText(data)
+				});
+				utools.outPlugin()
+				utools.hideMainWindow()
+				utools.showNotification('已复制')
             }
         }
     }
