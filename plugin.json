@@ -1,0 +1,22 @@
+{
+	"pluginName": "拷贝公钥",
+	"description": "拷贝公钥",
+	"logo": "logo.png",
+	"version": "0.0.1",
+	"preload": "preload.js",
+	"features": [
+		{
+			"code": "copy_ssh_pub",
+			"explain": "拷贝本地系统中的公钥",
+			"cmds":[
+				{
+					"type": "regex",
+					"label": "拷贝公钥",
+					"match": "/^ssh/i",
+					"minLength": 1,
+					"maxLength": 20
+				}
+			]
+		}
+	]
+}
