@@ -2,7 +2,7 @@
  * @Author: bonza bonzaphp@gmail.com
  * @Date: 2023-06-06 15:09:48
  * @LastEditors: bonza bonzaphp@gmail.com
- * @LastEditTime: 2023-06-07 13:30:29
+ * @LastEditTime: 2023-06-07 13:45:48
  * @FilePath: \utools\preload.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,7 +27,7 @@ window.exports = {
 				const homedir = os.homedir();
 				// 公钥文件路径
 				const publicKeyPath = path.join(homedir, '.ssh', 'id_rsa.pub');
-				// 读取公钥文件内容
+				// 异步读取公钥文件内容
 				fs.readFile(publicKeyPath, 'utf-8', (err, data) => {
 					if (err) {
 						console.error(err);
